@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal TV - Interfaz Profesional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="screen">
+        <header class="top-bar">
+            <div class="logo">MI CANAL TV</div>
+            <div id="reloj" class="clock">00:00:00</div>
+        </header>
+
+        <main class="main-content">
+            <div id="panel-principal" class="info-card">
+                <span class="category">DESTACADO</span>
+                <h1 id="titulo-principal">Cargando noticias destacadas...</h1>
+                <p id="descripcion-principal">La información se actualizará automáticamente en unos segundos.</p>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="weather-widget">
+                <h3>EL TIEMPO</h3>
+                <div id="temp" class="temp">--°C</div>
+                <div id="ciudad" class="city">Cargando...</div>
+            </div>
+            <div class="next-events">
+                <h3>PRÓXIMOS EVENTOS</h3>
+                <ul id="lista-eventos">
+                    <li>Cargando agenda...</li>
+                </ul>
+            </div>
+        </aside>
+
+        <footer class="ticker-wrapper">
+            <div class="ticker-label">ÚLTIMA HORA</div>
+            <div class="ticker-text">
+                <div id="noticias-scroll" class="ticker-move">
+                    Bienvenido a la emisión digital de Mi Canal TV... Mantente informado las 24 horas del día... 
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+  
