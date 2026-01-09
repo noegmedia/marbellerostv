@@ -1,21 +1,16 @@
 async function cargarContenido() {
-    try {
-        // Usamos data.json con el truco para evitar la caché
-        const respuesta = await fetch('./data.json?v=' + new Date().getTime());
-        
-        if (!respuesta.ok) throw new Error("Archivo no encontrado");
+  try {
+    // Fíjate bien: nombre exacto 'data.json'
+    const res = await fetch('./data.json?v=' + Date.now());
+    const d = await res.json();
 
-        const datos = await respuesta.json();
-
-        // IMPORTANTE: Los nombres aquí deben ser iguales a los de tu data.json
-        document.getElementById('titulo-principal').innerText = datos.titulo;
-        document.getElementById('descripcion-principal').innerText = datos.descripcion;
-        document.getElementById('temp').innerText = datos.clima;
-        document.getElementById('noticias-scroll').innerText = datos.noticias_barra;
-
-        console.log("Sincronización exitosa con data.json");
-
-    } catch (error) {
-        console.error("Error de conexión:", error);
-    }
+    document.getElementById('titulo-principal').innerText = d.titulo;
+    document.getElementById('descripcion-principal').innerText = d.descripcion;
+    document.getElementById('temp').innerText = d.clima;
+    document.getElementById('noticias-scroll').innerText = d.noticias_barra;
+  } catch (e) {
+    console.log("Error de carga");
+  }
 }
+setInterval(cargarContenido, 5000);
+cargarContenido();
