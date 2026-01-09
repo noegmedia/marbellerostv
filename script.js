@@ -1,3 +1,6 @@
+alert("¡El script funciona!");
+
+
 async function cargarContenido() {
   try {
     // Fíjate bien: nombre exacto 'data.json'
