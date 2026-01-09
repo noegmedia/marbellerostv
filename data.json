@@ -1,6 +1,24 @@
 {
-    "titulo": "BIENVENIDOS A MI CANAL",
-    "descripcion": "Esta es la primera prueba de emisión automática sin servidores costosos.",
-    "clima": "24°C",
-    "noticias_barra": "ÚLTIMA HORA: El sistema de noticias dinámico está funcionando correctamente. --- Sigue la programación en directo. ---"
+  "configuracion": {
+    "ultima_actualizacion": "2024-05-20 18:00",
+    "modo_canal": "INTERFAZ",
+    "ciudad_clima": "Madrid"
+  },
+  "clima": {
+    "actual": "22°C",
+    "estado": "Soleado",
+    "min": "15°C",
+    "max": "28°C"
+  },
+  "noticia_principal": {
+    "titulo": "Lanzamiento del nuevo satélite meteorológico",
+    "descripcion": "La misión permitirá predecir tormentas con una precisión del 95% en tiempo real.",
+    "categoria": "CIENCIA"
+  },
+  "noticias_secundarias": [
+    "El tráfico en el centro se normaliza tras las obras.",
+    "Inauguración de la nueva exposición de arte moderno.",
+    "Resultados deportivos: El equipo local gana el derbi."
+  ],
+  "ultima_hora": "AVISO: Mañana se esperan fuertes vientos en la zona norte del país. --- Manténgase informado. ---"
 }
