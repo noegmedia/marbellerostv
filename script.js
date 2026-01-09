@@ -1,40 +1,21 @@
 async function cargarContenido() {
-    console.log("Intentando cargar datos...");
     try {
-        const respuesta = await fetch('./datos.json?t=' + new Date().getTime());
+        // Usamos data.json con el truco para evitar la caché
+        const respuesta = await fetch('./data.json?v=' + new Date().getTime());
         
-        if (!respuesta.ok) {
-            throw new Error("No se pudo encontrar el archivo datos.json");
-        }
+        if (!respuesta.ok) throw new Error("Archivo no encontrado");
 
         const datos = await respuesta.json();
-        console.log("¡Datos cargados con éxito!", datos);
 
-        // Actualizamos los elementos si existen
-        const titulo = document.getElementById('titulo-principal');
-        if (titulo) titulo.innerText = datos.titulo || "Sin título";
+        // IMPORTANTE: Los nombres aquí deben ser iguales a los de tu data.json
+        document.getElementById('titulo-principal').innerText = datos.titulo;
+        document.getElementById('descripcion-principal').innerText = datos.descripcion;
+        document.getElementById('temp').innerText = datos.clima;
+        document.getElementById('noticias-scroll').innerText = datos.noticias_barra;
 
-        const desc = document.getElementById('descripcion-principal');
-        if (desc) desc.innerText = datos.descripcion || "Sin descripción";
-
-        const clima = document.getElementById('temp');
-        if (clima) clima.innerText = datos.clima || "--°C";
-
-        const ticker = document.getElementById('noticias-scroll');
-        if (ticker) ticker.innerText = datos.noticias_barra || "Cargando noticias...";
+        console.log("Sincronización exitosa con data.json");
 
     } catch (error) {
-        console.error("ERROR DETECTADO:", error.message);
+        console.error("Error de conexión:", error);
     }
 }
-
-// Reloj siempre activo
-setInterval(() => {
-    const reloj = document.getElementById('reloj');
-    if (reloj) reloj.innerText = new Date().toLocaleTimeString();
-}, 1000);
-
-// Cargar al inicio y cada 10 segundos
-cargarContenido();
-setInterval(cargarContenido, 10000);
-    
