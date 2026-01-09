@@ -16,13 +16,13 @@ async function cargarContenido() {
         document.getElementById('titulo-principal').innerText = datos.titulo;
         document.getElementById('descripcion-principal').innerText = datos.descripcion;
         document.getElementById('temp').innerText = datos.clima;
-        document.getElementById('noticias-scroll').innerText = datos.noticias_barra;
+        document.getElementById('noticias-scroll').innerText = datos.ultima_hora;
         
     } catch (error) {
         console.log("Esperando datos...");
     }
 }
-
+            
 // Revisa si hay cambios cada 5 segundos
 setInterval(cargarContenido, 5000);
 cargarContenido();
