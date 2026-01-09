@@ -1,24 +1,6 @@
 {
-  "configuracion": {
-    "ultima_actualizacion": "2024-05-20 18:00",
-    "modo_canal": "INTERFAZ",
-    "ciudad_clima": "Marbella"
-  },
-  "clima": {
-    "actual": "22°C",
-    "estado": "Soleado",
-    "min": "15°C",
-    "max": "28°C"
-  },
-  "noticia_principal": {
-    "titulo": "Lanzamiento del nuevo satélite meteorológico",
-    "descripcion": "La misión permitirá predecir tormentas con una precisión del 95% en tiempo real.",
-    "categoria": "CIENCIA"
-  },
-  "noticias_secundarias": [
-    "El tráfico en el centro se normaliza tras las obras.",
-    "Inauguración de la nueva exposición de arte moderno.",
-    "Resultados deportivos: El equipo local gana el derbi."
-  ],
-  "ultima_hora": "AVISO: Mañana se esperan fuertes vientos en la zona norte del país. --- Manténgase informado. ---"
+    "titulo": "MI GRAN CANAL",
+    "descripcion": "Emitiendo desde mi móvil",
+    "clima": "22°C",
+    "noticias_barra": "Noticia 1 --- Noticia 2 --- Noticia 3"
 }
