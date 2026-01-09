@@ -1,28 +1,40 @@
 async function cargarContenido() {
+    console.log("Intentando cargar datos...");
     try {
-        // Añadimos un número aleatorio al final para evitar que el navegador guarde una versión vieja (cache)
-        const respuesta = await fetch('datos.json?v=' + Math.random());
+        const respuesta = await fetch('./datos.json?t=' + new Date().getTime());
+        
+        if (!respuesta.ok) {
+            throw new Error("No se pudo encontrar el archivo datos.json");
+        }
+
         const datos = await respuesta.json();
+        console.log("¡Datos cargados con éxito!", datos);
 
-        console.log("Datos recibidos:", datos); // Esto te dirá en la consola si los lee
+        // Actualizamos los elementos si existen
+        const titulo = document.getElementById('titulo-principal');
+        if (titulo) titulo.innerText = datos.titulo || "Sin título";
 
-        if(document.getElementById('titulo-principal')) 
-            document.getElementById('titulo-principal').innerText = datos.titulo;
-        
-        if(document.getElementById('descripcion-principal'))
-            document.getElementById('descripcion-principal').innerText = datos.descripcion;
-        
-        if(document.getElementById('temp'))
-            document.getElementById('temp').innerText = datos.clima;
-            
-        if(document.getElementById('noticias-scroll'))
-            document.getElementById('noticias-scroll').innerText = datos.noticias_barra;
+        const desc = document.getElementById('descripcion-principal');
+        if (desc) desc.innerText = datos.descripcion || "Sin descripción";
+
+        const clima = document.getElementById('temp');
+        if (clima) clima.innerText = datos.clima || "--°C";
+
+        const ticker = document.getElementById('noticias-scroll');
+        if (ticker) ticker.innerText = datos.noticias_barra || "Cargando noticias...";
 
     } catch (error) {
-        console.error("Error leyendo el JSON:", error);
+        console.error("ERROR DETECTADO:", error.message);
     }
 }
 
-// Actualizar cada 5 segundos
-setInterval(cargarContenido, 5000);
+// Reloj siempre activo
+setInterval(() => {
+    const reloj = document.getElementById('reloj');
+    if (reloj) reloj.innerText = new Date().toLocaleTimeString();
+}, 1000);
+
+// Cargar al inicio y cada 10 segundos
 cargarContenido();
+setInterval(cargarContenido, 10000);
+    
