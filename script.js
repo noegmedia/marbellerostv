@@ -13,13 +13,18 @@ async function cargar() {
         const respuesta = await fetch('./data.json?v=' + Date.now());
         const d = await respuesta.json();
         
-        document.getElementById('titulo-principal').innerText = d.titulo;
-        document.getElementById('descripcion-principal').innerText = d.descripcion;
-        document.getElementById('temp').innerText = d.clima;
-        document.getElementById('noticias-scroll').innerText = d.noticias_barra;
+        // Ponemos las locales en la descripción o un área central
+        document.getElementById('descripcion-principal').innerText = d.noticias_locales;
+        
+        // Ponemos las nacionales en la barra de abajo
+        const ticker = document.getElementById('noticias-scroll');
+        if (ticker) {
+            ticker.innerText = d.noticias_nacionales;
+        }
     } catch (e) {
-        console.log("Error");
+        console.log("Error cargando noticias");
     }
 }
+
 cargar();
 setInterval(cargar, 10000);
