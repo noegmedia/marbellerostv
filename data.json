@@ -1,6 +1,7 @@
 {
-"titulo": "PRUEBA MOVIL",
-"descripcion": "Si ves esto, funciona",
-"clima": "25C",
-"noticias_barra": "PROBANDO EMISION..."
+    "titulo": "MARBELLA TV",
+    "descripcion": "Última hora desde la Costa del Sol",
+    "clima": "21°C",
+    "noticias_locales": "MARBELLA: Noticias no disponibles",
+    "noticias_nacionales": "ESPAÑA: Noticias no disponibles"
 }
