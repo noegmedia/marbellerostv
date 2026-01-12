@@ -1,1 +1,34 @@
 
+import urllib.request
+import json
+import xml.etree.ElementTree as ET
+from datetime import datetime
+
+def buscar_rss(url, limite=3):
+    try:
+        response = urllib.request.urlopen(url)
+        tree = ET.parse(response)
+        root = tree.getroot()
+        items = root.findall('.//item')
+        return [item.find('title').text for item in items[:limite]]
+    except:
+        return ["Noticias no disponibles"]
+
+# --- CONFIGURACIÓN DE FUENTES ---
+# Usamos Diario SUR Marbella y RTVE Nacional
+noticias_marbella = buscar_rss("https://www.diariosur.es/marbella/rss/")
+noticias_espana = buscar_rss("https://www.rtve.es/api/noticias/rss/")
+
+# --- ESTRUCTURA DEL JSON ---
+nuevos_datos = {
+    "titulo": "MARBELLA TV",
+    "descripcion": "Última hora desde la Costa del Sol",
+    "clima": "21°C", 
+    "noticias_locales": "MARBELLA: " + " --- ".join(noticias_marbella),
+    "noticias_nacionales": "ESPAÑA: " + " --- ".join(noticias_espana)
+}
+
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(nuevos_datos, f, ensure_ascii=False, indent=4)
+
+print("Noticias locales y nacionales actualizadas.")
