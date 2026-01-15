@@ -2,34 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.5">
-    <title>MarbellerosTV - La TV de Marbella de NoéGMedia</title>
-    <script src="./script.js?v=1"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marbella TV Digital</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="main-container">
-    <header>
-        <div id="reloj">00:00:00</div>
-        <div id="titulo-principal">MARBELLA DIGITAL</div>
-    </header>
+        <header>
+            <div id="clima-alerta" class="clima-box">
+                <span id="temp">--°C</span> | <span id="estado-clima">Cargando</span>
+            </div>
+            <div id="reloj">00:00:00</div>
+            <div id="titulo-banner">MARBELLA • INFO</div>
+        </header>
 
-    <main class="contenido-central">
-        <div class="label-local">NOTICIAS LOCALES • MARBELLA</div>
-        <div id="descripcion-principal">Cargando información...</div>
-    </main>
-</div>
+        <div class="grid-layout">
+            <section class="noticias-panel">
+                <div class="tag">ÚLTIMA HORA MARBELLA</div>
+                <h1 id="noticias-locales">Cargando titulares locales...</h1>
+                
+                <div class="tag" style="margin-top: 40px;">AGENDA CULTURAL</div>
+                <ul id="lista-eventos" class="eventos-lista">
+                    <li>Buscando eventos próximos...</li>
+                </ul>
+            </section>
 
-<div class="ticker-container">
-    <div class="ticker-label">NACIONAL</div>
-    <div class="ticker-wrapper">
-        <div id="noticias-scroll">Cargando titulares nacionales...</div>
+            <section class="trafico-panel">
+                <div class="tag">TRÁFICO EN TIEMPO REAL (A-7 / AP-7)</div>
+                <div class="cam-grid">
+                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/FotoCamara?idCamara=476"><span>San Pedro</span></div>
+                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/FotoCamara?idCamara=477"><span>Puerto Banús</span></div>
+                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/FotoCamara?idCamara=1240"><span>Nagüeles</span></div>
+                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/FotoCamara?idCamara=478"><span>Elviria</span></div>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
 
+    <div class="ticker-footer">
+        <div class="ticker-label">ESPAÑA</div>
+        <div class="ticker-wrap">
+            <div id="ticker-nacional" class="ticker-move"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-  
