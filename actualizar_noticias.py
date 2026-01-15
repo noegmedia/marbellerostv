@@ -23,6 +23,7 @@ nuevos_datos = {
     "titulo": "MARBELLA TV",
     "descripcion": "Última hora desde la Costa del Sol",
     "clima": "21°C", 
+    "ciudad": "Marbella, Málaga",
     "noticias_locales": "MARBELLA: " + " --- ".join(noticias_marbella),
     "noticias_nacionales": "ESPAÑA: " + " --- ".join(noticias_espana)
 }
