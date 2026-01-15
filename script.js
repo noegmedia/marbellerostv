@@ -1,30 +1,28 @@
-// FUNCIÓN RELOJ
-function reloj() {
-    const elementoReloj = document.getElementById('reloj');
-    if(elementoReloj) {
-        elementoReloj.innerText = new Date().toLocaleTimeString();
-    }
-}
-setInterval(reloj, 1000);
-
-// FUNCIÓN DATOS
-async function cargar() {
+async function actualizarPantalla() {
     try {
-        const respuesta = await fetch('./data.json?v=' + Date.now());
-        const d = await respuesta.json();
+        const res = await fetch('./data.json?v=' + Date.now());
+        const d = await res.json();
+
+        // Titulares y Noticias
+        document.getElementById('noticias-locales').innerText = d.noticias_locales;
+        document.getElementById('ticker-nacional').innerText = d.noticias_nacionales;
         
-        // Ponemos las locales en la descripción o un área central
-        document.getElementById('descripcion-principal').innerText = d.noticias_locales;
-        
-        // Ponemos las nacionales en la barra de abajo
-        const ticker = document.getElementById('noticias-scroll');
-        if (ticker) {
-            ticker.innerText = d.noticias_nacionales;
-        }
-    } catch (e) {
-        console.log("Error cargando noticias");
-    }
+        // Clima
+        document.getElementById('temp').innerText = d.clima.temp;
+        document.getElementById('estado-clima').innerText = d.clima.estado;
+        document.getElementById('clima-alerta').className = 'clima-box alerta-' + d.clima.alerta;
+
+        // Eventos
+        const lista = document.getElementById('lista-eventos');
+        lista.innerHTML = d.eventos.map(e => `<li>${e}</li>`).join('');
+
+    } catch (e) { console.error("Error cargando datos"); }
 }
 
-cargar();
-setInterval(cargar, 10000);
+function reloj() {
+    document.getElementById('reloj').innerText = new Date().toLocaleTimeString();
+}
+
+setInterval(reloj, 1000);
+setInterval(actualizarPantalla, 60000); // Actualiza cada minuto
+actualizarPantalla();
