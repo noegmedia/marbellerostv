@@ -1,55 +1,63 @@
 async function actualizarPantalla() {
     try {
-        // Añadimos un número aleatorio al final para evitar que el navegador guarde una copia vieja (cache)
-        const res = await fetch('./data.json?v=' + Date.now());
-        const d = await res.json();
+        // El Date.now() evita que la TV guarde noticias viejas en memoria
+        const respuesta = await fetch('./data.json?v=' + Date.now());
+        const datos = await respuesta.json();
 
-        // 1. Noticias Locales (Titulares grandes en el centro)
+        // 1. TITULARES DE MARBELLA (Sección central)
+        // Usamos innerHTML por si el texto trae caracteres especiales
         const contenedorLocales = document.getElementById('noticias-locales');
         if (contenedorLocales) {
-            contenedorLocales.innerText = d.noticias_locales;
+            contenedorLocales.innerHTML = datos.noticias_locales || "Cargando noticias locales...";
         }
 
-        // 2. Ticker Nacional (Barra inferior en movimiento)
+        // 2. TICKER NACIONAL (Barra inferior limpia)
         const ticker = document.getElementById('ticker-nacional');
         if (ticker) {
-            // Duplicamos el texto para que el bucle no tenga huecos
-            ticker.innerText = d.noticias_nacionales + " --- " + d.noticias_nacionales;
+            // Añadimos mucho espacio al final para que el bucle sea fluido
+            ticker.innerText = datos.noticias_nacionales + "          ---          ";
         }
         
-        // 3. Clima y Alertas
-        document.getElementById('temp').innerText = d.clima.temp;
-        document.getElementById('estado-clima').innerText = d.clima.estado;
+        // 3. CLIMA REAL
+        document.getElementById('temp').innerText = datos.clima.temp;
+        document.getElementById('estado-clima').innerText = datos.clima.estado;
         
         const cajaClima = document.getElementById('clima-alerta');
         if (cajaClima) {
-            // Esto cambia el color de la caja automáticamente (verde, amarillo, rojo)
-            cajaClima.className = 'clima-box alerta-' + d.clima.alerta;
+            // Actualiza el color de la alerta (verde, amarillo, naranja, rojo)
+            cajaClima.className = 'clima-box alerta-' + datos.clima.alerta;
         }
 
-        // 4. Agenda de Eventos
+        // 4. AGENDA DE EVENTOS
         const listaEventos = document.getElementById('lista-eventos');
-        if (listaEventos && d.eventos) {
-            listaEventos.innerHTML = d.eventos
+        if (listaEventos && datos.eventos) {
+            listaEventos.innerHTML = datos.eventos
                 .map(evento => `<li>${evento}</li>`)
                 .join('');
         }
 
-    } catch (e) {
-        console.error("Error al cargar los datos del JSON:", e);
+    } catch (error) {
+        console.error("Error al leer el archivo de datos:", error);
     }
 }
 
-// Reloj en tiempo real
-function actualizarReloj() {
-    const ahora = new Date();
-    const opciones = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    document.getElementById('reloj').innerText = ahora.toLocaleTimeString('es-ES', opciones);
+// Reloj digital profesional
+function iniciarReloj() {
+    const relojElemento = document.getElementById('reloj');
+    setInterval(() => {
+        const ahora = new Date();
+        relojElemento.innerText = ahora.toLocaleTimeString('es-ES', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    }, 1000);
 }
 
-// Ejecución inicial y bucles
-setInterval(actualizarReloj, 1000); // Cada segundo
-setInterval(actualizarPantalla, 300000); // Cada 5 minutos busca noticias nuevas en el JSON
-
-actualizarReloj();
+// LANZAMIENTO
+iniciarReloj();
 actualizarPantalla();
+
+// El robot de GitHub actualiza el JSON cada hora, 
+// pero el script revisa el archivo cada 5 minutos por si hay cambios manuales.
+setInterval(actualizarPantalla, 300000); 
