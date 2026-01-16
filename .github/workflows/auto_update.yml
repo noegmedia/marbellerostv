@@ -16,6 +16,8 @@ jobs:
           python-version: '3.9'
       - name: Ejecutar script
         run: python actualizar_noticias.py
+        env:
+          CLIMA_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
       - name: Guardar cambios
         run: |
           git config --local user.email "action@github.com"
