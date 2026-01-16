@@ -10,18 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Necesario para poder hacer el pull/push correctamente
+
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Ejecutar script
-        run: python actualizar_noticias.py
         env:
           CLIMA_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        run: python actualizar_noticias.py
+
       - name: Guardar cambios
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data.json
-          git commit -m "Update" || exit 0
-          git push
+          # El truco está aquí: trae los cambios que tú hiciste antes de subir los suyos
+          git pull --rebase origin main
+          git commit -m "Actualización automática de noticias" || exit 0
+          git push origin main
