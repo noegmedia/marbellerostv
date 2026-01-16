@@ -1,13 +1,14 @@
 {
     "titulo": "MARBELLA DIGITAL",
     "clima": {
-        "temp": "19°C",
-        "estado": "Cielos Despejados",
+        "temp": "12°C",
+        "estado": "Lluvia moderada",
         "alerta": "verde"
     },
-    "noticias_locales": "Actualizando información...",
-    "noticias_nacionales": "Actualizando información...",
+    "noticias_locales": "Actualizando información local...",
+    "noticias_nacionales": "Actualizando información local...",
     "eventos": [
-        "Actualizando información..."
-    ]
+        "Actualizando información local..."
+    ],
+    "ultima_actualizacion": "20:39"
 }
