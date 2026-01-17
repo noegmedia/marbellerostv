@@ -1,54 +1,65 @@
-:root { --azul: #004a99; --blanco: #fff; --rojo: #cc0000; --verde: #28a745; }
-body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background: var(--azul); font-family: 'Arial Black', sans-serif; }
-
-/* HEADER SIMÉTRICO */
-.main-header {
-    height: 110px; background: var(--blanco);
-    display: grid; grid-template-columns: 1fr auto 1fr;
-    align-items: center; padding: 0 40px; border-bottom: 6px solid var(--azul);
-}
-.logo { font-size: 2rem; font-weight: 900; color: var(--azul); }
-.logo span { color: var(--rojo); }
-#reloj { font-size: 5.5rem; font-weight: 900; color: #1a1a1a; letter-spacing: -2px; }
-
-#clima-alerta { background: var(--verde); color: white; padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; }
-#clima-icono { width: 50px; height: 50px; filter: brightness(0) invert(1); }
-#clima-temp { font-size: 2rem; font-weight: 900; }
-
-/* ESCENARIO REDUCIDO 20% */
-#tv-stage {
-    height: calc(100vh - 170px);
-    width: 80%; /* REDUCCIÓN DEL 20% */
-    margin: 0 auto; /* CENTRADO */
-    position: relative;
-    padding: 20px 0;
+:root {
+    --azul: #0055b8;
+    --texto: #1a365d;
+    --fondo: #f4f7f9;
 }
 
-.slide {
-    position: absolute; width: 100%; height: 100%;
-    opacity: 0; transition: opacity 1.5s ease-in-out;
-    display: flex; justify-content: center; align-items: center;
+body {
+    margin: 0; font-family: 'Segoe UI', sans-serif;
+    background: var(--fondo); color: var(--texto);
+    height: 100vh; overflow: hidden;
 }
-.slide.active { opacity: 1; }
 
-/* ESTILO NOTICIA FULL */
-.full-destacada { width: 100%; height: 100%; border-radius: 30px; overflow: hidden; position: relative; border: 6px solid white; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-.full-destacada img { width: 100%; height: 100%; object-fit: cover; }
-.info-box { position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 60px; color: white; width: 100%; }
-.info-box h1 { font-size: 4rem; margin: 0; text-transform: uppercase; }
+.main-container { padding: 30px; height: calc(100vh - 70px); }
 
-/* CÁMARAS IGUALADAS */
-.traffic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; height: 100%; }
-.cam-box { border-radius: 20px; overflow: hidden; border: 4px solid white; position: relative; background: #000; }
-.cam-box img { width: 100%; height: 100%; object-fit: cover; }
-.cam-box span { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; padding: 10px; text-align: center; }
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3px solid var(--azul); padding-bottom: 15px;
+}
 
-/* LISTÍN */
-.telefonos-container { width: 80%; display: grid; grid-template-columns: 1fr; gap: 15px; }
-.tel-row { background: white; color: var(--azul); padding: 25px; border-radius: 15px; display: flex; justify-content: space-between; font-size: 2.5rem; font-weight: 900; }
+#reloj { font-size: 3rem; font-weight: 200; color: var(--azul); }
+
+#titulo-banner { 
+    background: var(--azul); color: white; 
+    padding: 8px 20px; font-weight: 800; border-radius: 4px;
+}
+
+.grid-layout { 
+    display: grid; grid-template-columns: 1.2fr 0.8fr; 
+    gap: 40px; margin-top: 30px; 
+}
+
+.tag { 
+    font-size: 0.8rem; font-weight: 800; color: var(--azul); 
+    letter-spacing: 1px; margin-bottom: 15px;
+}
+
+#noticias-locales { font-size: 2.2rem; line-height: 1.2; margin: 0; }
+
+.eventos-lista { list-style: none; padding: 0; font-size: 1.2rem; }
+.eventos-lista li { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid var(--azul); }
+
+/* CÁMARAS */
+.cam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.cam { position: relative; border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.cam img { width: 100%; display: block; opacity: 0.9; }
+.cam span { position: absolute; top: 0; left: 0; background: var(--azul); color: white; padding: 2px 8px; font-size: 0.6rem; }
+
+/* CLIMA Y ALERTAS */
+.clima-box { padding: 10px; border-radius: 5px; background: white; font-weight: bold; }
+.alerta-verde { border-left: 6px solid #4CAF50; }
+.alerta-amarillo { border-left: 6px solid #FFC107; background: #fff8e1; }
+.alerta-naranja { border-left: 6px solid #FF9800; background: #fff3e0; }
+.alerta-rojo { border-left: 6px solid #f44336; background: #ffebee; animation: blink 1s infinite; }
 
 /* TICKER */
-.main-footer { height: 60px; background: var(--blanco); position: fixed; bottom: 0; width: 100%; display: flex; align-items: center; }
-.ticker-label { background: var(--rojo); color: white; padding: 0 30px; height: 100%; display: flex; align-items: center; font-weight: bold; font-size: 1.5rem; }
-.ticker-move { white-space: nowrap; animation: ticker 50s linear infinite; font-size: 2rem; color: #1a1a1a; font-weight: bold; }
-@keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.ticker-footer {
+    position: fixed; bottom: 0; width: 100%; height: 60px;
+    background: white; display: flex; align-items: center;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+}
+.ticker-label { background: var(--azul); color: white; padding: 0 25px; height: 100%; display: flex; align-items: center; font-weight: bold; }
+.ticker-move { display: inline-block; white-space: nowrap; animation: scroll 50s linear infinite; font-size: 1.3rem; }
+
+@keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+@keyframes blink { 50% { opacity: 0.6; } }
