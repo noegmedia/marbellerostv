@@ -1,63 +1,50 @@
-async function actualizarPantalla() {
+let current = 1;
+const timings = { 1: 5000, 2: 15000, 3: 10000, 4: 15000, 5: 10000 };
+
+async function loadData() {
     try {
-        // El Date.now() evita que la TV guarde noticias viejas en memoria
-        const respuesta = await fetch('./data.json?v=' + Date.now());
-        const datos = await respuesta.json();
-
-        // 1. TITULARES DE MARBELLA (Sección central)
-        // Usamos innerHTML por si el texto trae caracteres especiales
-        const contenedorLocales = document.getElementById('noticias-locales');
-        if (contenedorLocales) {
-            contenedorLocales.innerHTML = datos.noticias_locales || "Cargando noticias locales...";
-        }
-
-        // 2. TICKER NACIONAL (Barra inferior limpia)
-        const ticker = document.getElementById('ticker-nacional');
-        if (ticker) {
-            // Añadimos mucho espacio al final para que el bucle sea fluido
-            ticker.innerText = datos.noticias_nacionales + "          ---          ";
-        }
+        const res = await fetch('./data.json?v=' + Date.now());
+        const d = await res.json();
         
-        // 3. CLIMA REAL
-        document.getElementById('temp').innerText = datos.clima.temp;
-        document.getElementById('estado-clima').innerText = datos.clima.estado;
-        
-        const cajaClima = document.getElementById('clima-alerta');
-        if (cajaClima) {
-            // Actualiza el color de la alerta (verde, amarillo, naranja, rojo)
-            cajaClima.className = 'clima-box alerta-' + datos.clima.alerta;
-        }
+        // Destacada
+        document.getElementById('destacada-container').innerHTML = `
+            <img src="${d.noticia_destacada.ImagenURL}">
+            <div class="txt"><h1>${d.noticia_destacada.Titular}</h1><p>${d.noticia_destacada.Subtitulo}</p></div>`;
 
-        // 4. AGENDA DE EVENTOS
-        const listaEventos = document.getElementById('lista-eventos');
-        if (listaEventos && datos.eventos) {
-            listaEventos.innerHTML = datos.eventos
-                .map(evento => `<li>${evento}</li>`)
-                .join('');
-        }
+        // Normales
+        document.getElementById('lista-noticias').innerHTML = d.noticias_normales
+            .map(n => `<div class="card-n"><img src="${n.ImagenURL}"><h3>${n.Titular}</h3></div>`).join('');
 
-    } catch (error) {
-        console.error("Error al leer el archivo de datos:", error);
-    }
+        // Clima
+        document.getElementById('clima-info').innerHTML = `<h1>MARBELLA: ${d.clima.temp} | Humedad: ${d.clima.humedad}</h1>`;
+
+        // Telefonos
+        document.getElementById('telefonos-grid').innerHTML = d.telefonos
+            .map(t => `<div class="tel-item"><span>${t.Servicio}</span><span>${t.Numero}</span></div>`).join('');
+
+    } catch (e) { console.error("Error al cargar datos"); }
 }
 
-// Reloj digital profesional
-function iniciarReloj() {
-    const relojElemento = document.getElementById('reloj');
-    setInterval(() => {
-        const ahora = new Date();
-        relojElemento.innerText = ahora.toLocaleTimeString('es-ES', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-    }, 1000);
+function updateTraffic() {
+    // Refresca las cámaras DGT añadiendo un timestamp para evitar caché
+    document.querySelectorAll('.cam-box img').forEach(img => {
+        const src = img.src.split('?')[0];
+        img.src = src + '?t=' + Date.now();
+    });
 }
 
-// LANZAMIENTO
-iniciarReloj();
-actualizarPantalla();
+function run() {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById(`escena-${current}`).classList.add('active');
+    
+    if(current === 4) updateTraffic();
 
-// El robot de GitHub actualiza el JSON cada hora, 
-// pero el script revisa el archivo cada 5 minutos por si hay cambios manuales.
-setInterval(actualizarPantalla, 300000); 
+    setTimeout(() => {
+        current = current < 5 ? current + 1 : 1;
+        run();
+    }, timings[current]);
+}
+
+loadData();
+setInterval(loadData, 300000);
+run();
