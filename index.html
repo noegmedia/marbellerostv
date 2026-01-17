@@ -4,46 +4,41 @@
     <meta charset="UTF-8">
     <title>MarbellerosTV Live</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    
-   <div class="main-container">
-    <header>
-       <div id="titulo-banner">
-            <h1>MarbellaTV</h1>
-        <div id="clima-alerta" class="clima-box alerta-verde">
+    <div class="main-container">
+        <header>
+            <div id="titulo-banner">
+                <h1>MarbellaTV</h1>
+            </div>
+            <div id="clima-alerta" class="clima-box alerta-verde">
             <span id="clima-icono"></span><span id="clima-temp">--°C</span> | <span id="clima-texto">Cargando...</span> 
-        </div>
-        <div id="reloj">00:00:00</div>
-        
-        </div>
-    </header>
-
-    <div class="grid-layout">
-        <section>
-            <div class="headers">ÚLTIMAS NOTICIAS</div>
-            <div id="noticia_principal">Cargando noticias de Marbella...</div>
-            
-            <div class="headers" style="margin-top: 30px;">Teléfonos de Interés</div>
-            <ul id="lista-t" class="eventos-lista"></ul>
-        </section>
-
-        <section class="camaras">
-            <div class="cam-grid">
+            </div>
+            <div id="reloj">00:00:00</div>
+        </header>
+    <main id="tv-stage">
+        <div class="grid-layout">
+            <section>
+                <div class="headers">ÚLTIMAS NOTICIAS</div>
+                <div id="noticia-principal">Cargando noticias de Marbella...</div>
+                <div class="headers" style="margin-top: 30px;">Teléfonos de Interés</div>
+                    <ul id="lista-t" class="eventos-lista"></ul>
+            </section>
+            <section class="camaras">
+                <div class="cam-grid">
                     <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>La Cañada</span></div>
                     <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Ojén</span></div>
                     <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>Marbella Este</span></div>
                     <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Nueva Andalucía</span></div>
                     <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>Puerto Banús</span></div>
-            </div>
-        </section>
-    </div>
-</div>
-
+                </div>
+            </section>
+        </div>
+    </main>
     <footer class="main-footer">
         <div class="ticker-wrap"><div id="ticker-footer" class="ticker-move"></div></div>
-    </footer>
-
+    </footer>  
     <script src="script.js"></script>
 </body>
 </html>

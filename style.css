@@ -4,6 +4,15 @@
     --fondo: #f4f7f9;
 }
 
+/* ESCENARIO REDUCIDO 20% */
+#tv-stage {
+    height: calc(100vh - 170px);
+    width: 80%; /* REDUCCIÓN DEL 20% */
+    margin: 0 auto; /* CENTRADO */
+    position: relative;
+    padding: 20px 0;
+}
+
 body {
     margin: 0; font-family: 'Segoe UI', sans-serif;
     background: var(--fondo); color: var(--texto);
