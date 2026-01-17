@@ -17,20 +17,20 @@ function rotarNoticias() {
     if (listaNoticias.length === 0) return;
 
     const contenedor = document.getElementById('noticia-principal');
-    
-    // Añadimos un efecto de desvanecimiento suave (opcional, requiere CSS)
     contenedor.style.opacity = 0;
 
     setTimeout(() => {
-        // Cambiamos al siguiente titular
-        contenedor.innerText = listaNoticias[noticiaActualIndex].Titular;
+        const n = listaNoticias[noticiaActualIndex];
         
-        // Efecto de entrada
+        // Creamos la estructura de Titular + Subtítulo
+        contenedor.innerHTML = `
+            <div class="titular-grande">${n.Titular}</div>
+            <div class="subtitulo-noticia">${n.Subtitulo || ''}</div>
+        `;
+        
         contenedor.style.opacity = 1;
-
-        // Avanzamos el índice para la próxima vez
         noticiaActualIndex = (noticiaActualIndex + 1) % listaNoticias.length;
-    }, 500); // Medio segundo de espera para el efecto
+    }, 500);
 }
 
 // 3. CARGA DE DATOS DESDE DATA.JSON (Y API CLIMA vía Python)
@@ -45,7 +45,7 @@ async function cargarDatos() {
         document.getElementById('clima-icono').src = `https://openweathermap.org/img/wn/${d.clima.icono_id}@2x.png`;
 
         // --- TICKER (Última hora) ---
-        document.getElementById('ticker-footer').innerText = d.ticker_footer;
+        document.getElementById('ticker-footer').innerHTML = d.ticker_footer.split(' • ').join(' <span style="color:var(--azul); padding: 0 40px;"> ■ </span> ');
 
         // --- TELÉFONOS ---
         const listaT = document.getElementById('lista-t');
@@ -64,6 +64,8 @@ async function cargarDatos() {
             document.getElementById('noticia-principal').innerText = listaNoticias[0].Titular;
             noticiaActualIndex = 1;
         }
+
+        
 
     } catch (error) {
         console.error("Error al cargar los datos:", error);
