@@ -2,48 +2,52 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarbellerosTV - La TV de Marbella</title>
+    <title>MarbellerosTV Live</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-container">
-        <header>
-            <div id="titulo-banner">MarbellerosTV</div>
-            <div id="reloj">00:00:00</div>
-            <div id="clima-alerta" class="clima-box alerta-verde">
-                <div class="clima-info">
-                    <span id="temp" class="temperatura">--°C</span>
-                    <span id="estado-clima" class="estado">Cargando...</span>
+    <div id="tv-container">
+        <section id="escena-1" class="slide active">
+            <div class="bienvenida">
+                <h1>Bienvenidos a MarbellerosTV</h1>
+                <p>La televisión online de Marbella</p>
+            </div>
+        </section>
+
+        <section id="escena-2" class="slide">
+            <div class="news-grid">
+                <div id="destacada-container" class="col-main"></div>
+                <div id="lista-noticias" class="col-side"></div>
+            </div>
+        </section>
+
+        <section id="escena-3" class="slide">
+            <div class="clima-container">
+                <div id="clima-info" class="clima-header"></div>
+                <img src="https://www.aemet.es/imagenes_d/eltiempo/observacion/radar/r8ma_max.gif" class="radar-img">
+            </div>
+        </section>
+
+        <section id="escena-4" class="slide">
+            <div class="traffic-container">
+                <div class="tag-viva">TRÁFICO EN DIRECTO DGT</div>
+                <div class="traffic-grid">
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>Marbella - La Cañada</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Marbella - Ojén</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>Marbella - Este</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Marbella - Nueva Andalucía</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>Marbella - Puerto Banús</span></div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <div class="grid-layout">
-            <section class="noticias-panel">
-                <div class="tag">ÚLTIMA HORA MARBELLA</div>
-                <h1 id="noticias-locales">Cargando titulares locales...</h1>
-            </section>
-
-            <section class="trafico-panel">
-                <div class="tag">TRÁFICO EN TIEMPO REAL (A-7 / AP-7)</div>
-                <div class="cam-grid">
-                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>Marbella - La Cañada</span></div>
-                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Marbella - Ojén</span></div>
-                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>Marbella - Este</span></div>
-                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Marbella - Nueva Andalucia</span></div>
-                    <div class="cam"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>Marbella - Puerto Banus</span></div>
-                </div>
-            </section>
-        </div>
+        <section id="escena-5" class="slide">
+            <div class="listin">
+                <h2>TELÉFONOS DE INTERÉS MARBELLA</h2>
+                <div id="telefonos-grid" class="telefonos-grid"></div>
+            </div>
+        </section>
     </div>
-
-    <div class="ticker-footer">
-        <div class="ticker-wrap">
-            <div id="ticker-nacional" class="ticker-move"></div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
