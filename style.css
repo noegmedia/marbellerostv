@@ -1,94 +1,37 @@
-:root {
-    --azul: #0055b8;
-    --texto: #1a365d;
-    --fondo: #f4f7f9;
-}
+:root { --azul: #004a99; --rojo: #cc0000; }
+body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Arial', sans-serif; overflow: hidden; }
+#tv-container { width: 100vw; height: 100vh; position: relative; }
+.slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.slide.active { opacity: 1; z-index: 10; }
 
-/* Reducción general del 20% mediante el tamaño de fuente base */
-html {
-    font-size: 80%; /* Esto reduce todo lo que use 'rem' de forma proporcional */
-}
+/* BIENVENIDA */
+.bienvenida h1 { font-size: 5rem; text-align: center; }
 
-body {
-    margin: 0; 
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--fondo); 
-    color: var(--texto);
-    height: 100vh; 
-    overflow: hidden;
-}
+/* NOTICIAS */
+.news-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; width: 95%; height: 85%; gap: 20px; }
+.col-main { position: relative; border-radius: 15px; overflow: hidden; }
+.col-main img { width: 100%; height: 100%; object-fit: cover; }
+.col-main .txt { position: absolute; bottom: 0; padding: 30px; background: linear-gradient(transparent, black); width: 100%; }
+.col-side { display: flex; flex-direction: column; gap: 10px; }
+.card-n { display: flex; background: #111; height: 110px; border-radius: 8px; overflow: hidden; }
+.card-n img { width: 160px; object-fit: cover; }
 
-.main-container { 
-    padding: 2% 4%; 
-    height: calc(100vh - 60px); 
-}
-
-header {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    border-bottom: 2px solid var(--azul); 
-    padding-bottom: 10px;
-}
-
-#reloj { font-size: 3rem; font-weight: 200; color: var(--azul); }
-
-#titulo-banner { 
-    background: var(--azul); 
-    color: white; 
-    padding: 5px 15px; 
-    font-weight: 800; 
-    border-radius: 4px;
-    font-size: 1.2rem;
-}
-
-.grid-layout { 
+/* TRÁFICO - Cuadrícula de 5 cámaras */
+.traffic-container { width: 95%; height: 90%; text-align: center; }
+.tag-viva { background: var(--rojo); padding: 10px 30px; font-weight: bold; border-radius: 5px; margin-bottom: 15px; display: inline-block; }
+.traffic-grid { 
     display: grid; 
-    grid-template-columns: 1.2fr 0.8fr; 
-    gap: 40px; 
-    margin-top: 20px; 
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: 1fr 1fr; 
+    gap: 15px; 
+    height: 80%; 
 }
+.cam-box { position: relative; background: #222; border-radius: 10px; overflow: hidden; border: 2px solid #333; }
+.cam-box img { width: 100%; height: 100%; object-fit: cover; }
+.cam-box span { position: absolute; bottom: 0; left: 0; background: rgba(0,0,0,0.8); padding: 5px 10px; font-size: 1rem; }
+/* La primera cámara ocupa dos filas para que el diseño de 5 encaje bien */
+.cam-box:first-child { grid-row: span 2; }
 
-/* Titulares de Marbella */
-#noticias-locales { 
-    font-size: 2rem; /* Tamaño ajustado para 4K */
-    line-height: 1.3; 
-    margin: 0; 
-    font-weight: 700;
-}
-
-.eventos-lista { font-size: 1.1rem; }
-
-/* Cámaras más compactas */
-.cam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.cam img { width: 100%; border-radius: 4px; }
-
-/* TICKER INFERIOR LIMPIO (Sin etiqueta España) */
-.ticker-footer {
-    position: fixed; 
-    bottom: 0; 
-    width: 100%; 
-    height: 50px;
-    background: white; 
-    display: flex; 
-    align-items: center;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-}
-
-.ticker-wrap {
-    width: 100%;
-    overflow: hidden;
-}
-
-.ticker-move { 
-    display: inline-block; 
-    white-space: nowrap; 
-    animation: scroll 60s linear infinite; 
-    font-size: 1.4rem; 
-    color: var(--texto);
-}
-
-@keyframes scroll { 
-    from { transform: translateX(100%); } 
-    to { transform: translateX(-100%); } 
-}
+/* LISTÍN */
+.telefonos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 85%; }
+.tel-item { background: var(--azul); padding: 20px; border-radius: 10px; display: flex; justify-content: space-between; font-size: 1.8rem; font-weight: bold; }
