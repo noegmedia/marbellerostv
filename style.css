@@ -2,73 +2,157 @@
     --azul: #0055b8;
     --texto: #1a365d;
     --fondo: #f4f7f9;
-}
-
-/* ESCENARIO REDUCIDO 20% */
-#tv-stage {
-    height: calc(100vh - 170px);
-    width: 80%; /* REDUCCIÓN DEL 20% */
-    margin: 0 auto; /* CENTRADO */
-    position: relative;
-    padding: 20px 0;
+    --blanco: #ffffff;
 }
 
 body {
-    margin: 0; font-family: 'Segoe UI', sans-serif;
-    background: var(--fondo); color: var(--texto);
-    height: 100vh; overflow: hidden;
+    margin: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--fondo); 
+    color: var(--texto);
+    height: 100vh; 
+    overflow: hidden;
 }
 
-.main-container { padding: 30px; height: calc(100vh - 70px); }
+/* ESCENARIO REDUCIDO 20% Y CENTRADO */
+.main-container {
+    width: 80%; /* Reducción del 20% */
+    margin: 0 auto; /* Centrado horizontal */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
 
+/* CABECERA SIMÉTRICA */
 header {
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 3px solid var(--azul); padding-bottom: 15px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 3px solid var(--azul); 
+    padding: 20px 0;
+    height: 100px;
 }
 
-#reloj { font-size: 3rem; font-weight: 200; color: var(--azul); }
-
-#titulo-banner { 
-    background: var(--azul); color: white; 
-    padding: 8px 20px;font-size: 0.8rem; font-weight: 200; border-radius: 4px;
+#titulo-banner h1 { 
+    background: var(--azul); 
+    color: white; 
+    padding: 10px 25px;
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    border-radius: 6px;
+    margin: 0;
+    text-transform: uppercase;
 }
 
+#reloj { 
+    font-size: 4.5rem; 
+    font-weight: 200; 
+    color: var(--azul); 
+    font-variant-numeric: tabular-nums;
+}
+
+/* CLIMA */
+.clima-box { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    background: white; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.alerta-verde { border-left: 6px solid #4CAF50; }
+#clima-icono { width: 45px; height: 45px; }
+#clima-temp { font-size: 1.8rem; font-weight: 800; }
+#clima-texto { font-size: 0.9rem; text-transform: uppercase; font-weight: 600; color: #666; }
+
+/* CUERPO DE DOS COLUMNAS */
 .grid-layout { 
-    display: grid; grid-template-columns: 1.2fr 0.8fr; 
-    gap: 40px; margin-top: 30px; 
+    display: grid; 
+    grid-template-columns: 1.1fr 0.9fr; /* Proporción de columnas */
+    gap: 50px; 
+    margin-top: 40px;
+    height: calc(100vh - 300px); /* Ajuste para que no choque con el footer */
 }
 
 .headers { 
-    font-size: 0.8rem; font-weight: 800; color: var(--azul); 
-    letter-spacing: 1px; margin-bottom: 15px;
+    font-size: 0.9rem; 
+    font-weight: 800; 
+    color: var(--azul); 
+    letter-spacing: 2px; 
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
-#noticias-locales { font-size: 2.2rem; line-height: 1.2; margin: 0; }
-
-.eventos-lista { list-style: none; padding: 0; font-size: 1.2rem; }
-.eventos-lista li { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid var(--azul); }
-
-/* CÁMARAS */
-.cam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.cam { position: relative; border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-.cam img { width: 100%; display: block; opacity: 0.9; }
-.cam span { position: absolute; top: 3; left: 3; background: var(--azul); color: white; padding: 2px 8px; font-size: 0.6rem; }
-
-/* CLIMA Y ALERTAS */
-.clima-box { padding: 10px; border-radius: 5px; background: white; font-weight: bold; }
-.alerta-verde { border-left: 6px solid #4CAF50; }
-.alerta-amarillo { border-left: 6px solid #FFC107; background: #fff8e1; }
-.alerta-naranja { border-left: 6px solid #FF9800; background: #fff3e0; }
-.alerta-rojo { border-left: 6px solid #f44336; background: #ffebee; animation: blink 1s infinite; }
-
-/* TICKER */
-.ticker-footer {
-    position: fixed; bottom: 0; width: 100%; height: 60px;
-    background: white; display: flex; align-items: center;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+/* NOTICIA PRINCIPAL */
+#noticia-principal { 
+    font-size: 2.5rem; 
+    line-height: 1.1; 
+    font-weight: 800;
+    margin: 0; 
+    color: var(--texto);
 }
-.ticker-label { background: var(--azul); color: white; padding: 0 25px; height: 100%; display: flex; align-items: center; font-weight: bold; }
-.ticker-move { display: inline-block; white-space: nowrap; animation: scroll 50s linear infinite; font-size: 1.3rem; }
 
-@keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
-@keyframes blink { 50% { opacity: 0.6; } }
+/* TELÉFONOS */
+.eventos-lista { 
+    list-style: none; 
+    padding: 0; 
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Teléfonos en dos mini-columnas */
+    gap: 15px;
+}
+.eventos-lista li { 
+    background: white;
+    padding: 15px; 
+    border-left: 4px solid var(--azul); 
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* MOSAICO DE CÁMARAS DGT */
+.cam-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+}
+.cam-box { 
+    position: relative; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    background: #000; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    border: 2px solid white;
+}
+.cam-box img { 
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    display: block; 
+}
+.cam-box span { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    background: rgba(0, 85, 184, 0.85); /* Azul corporativo con transparencia */
+    color: white; 
+    padding: 5px; 
+    font-size: 0.75rem; 
+    text-align: center;
+    font-weight: bold;
+}
+
+/* TICKER INFERIOR (FOOTER) */
+.main-footer {
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    height: 70px;
+    background: white; 
+    display: flex;
