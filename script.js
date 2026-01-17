@@ -1,51 +1,37 @@
-let current = 1;
-const timings = { 1: 5000, 2: 15000, 3: 10000, 4: 15000, 5: 10000 };
+let subEscena = 1;
 
-function actualizarReloj() {
-    document.getElementById('reloj').innerText = new Date().toLocaleTimeString('es-ES');
+function rotarPanelDerecho() {
+    document.querySelectorAll('.sub-slide').forEach(s => s.classList.remove('active'));
+    if(subEscena === 1) document.getElementById('sub-escena-noticias').classList.add('active');
+    if(subEscena === 2) document.getElementById('sub-escena-trafico').classList.add('active');
+    if(subEscena === 3) document.getElementById('sub-escena-telefonos').classList.add('active');
+    
+    subEscena = subEscena < 3 ? subEscena + 1 : 1;
 }
-setInterval(actualizarReloj, 1000);
 
 async function loadData() {
-    try {
-        const res = await fetch('./data.json?v=' + Date.now());
-        const d = await res.json();
-        
-        // Ticker Footer desde Excel (Tipo F)
-        document.getElementById('ticker-footer').innerText = d.ticker_footer;
-
-        // Noticias
-        document.getElementById('destacada-container').innerHTML = `
-            <img src="${d.noticia_destacada.ImagenURL}">
-            <div class="txt"><h1>${d.noticia_destacada.Titular}</h1><p>${d.noticia_destacada.Subtitulo}</p></div>`;
-
-        document.getElementById('lista-noticias').innerHTML = d.noticias_normales
-            .map(n => `<div style="display:flex; background:rgba(0,0,0,0.3); margin-bottom:10px; height:110px; border-radius:8px; overflow:hidden; border: 1px solid white;">
-                <img src="${n.ImagenURL}" style="width:160px; object-fit:cover;">
-                <h3 style="padding:10px; font-size:1.1rem; margin:0; color:white;">${n.Titular}</h3>
-            </div>`).join('');
-
-        // Listín
-        document.getElementById('telefonos-grid').innerHTML = d.telefonos
-            .map(t => `<div class="tel-item"><span>${t.Servicio}</span><span>${t.Numero}</span></div>`).join('');
-
-        // Clima
-        document.getElementById('clima-info').innerHTML = `<h1 style="font-size:3rem; color:white;">MARBELLA: ${d.clima.temp} | Humedad: ${d.clima.humedad}</h1>`;
-
-    } catch (e) { console.error("Cargando..."); }
-}
-
-function run() {
-    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-    const nextSlide = document.getElementById(`escena-${current}`);
-    if(nextSlide) nextSlide.classList.add('active');
+    const res = await fetch('./data.json?v=' + Date.now());
+    const d = await res.json();
     
-    setTimeout(() => {
-        current = current < 5 ? current + 1 : 1;
-        run();
-    }, timings[current]);
+    // Noticia Principal
+    document.getElementById('noticia-principal').innerHTML = `
+        <img src="${d.noticia_destacada.ImagenURL}">
+        <div class="info-d"><h1>${d.noticia_destacada.Titular}</h1><p>${d.noticia_destacada.Subtitulo}</p></div>`;
+    
+    // Lista Noticias Normales
+    document.getElementById('lista-n').innerHTML = d.noticias_normales
+        .map(n => `<div style="display:flex; margin-bottom:10px; background:rgba(0,0,0,0.2); padding:10px; border-radius:10px;">
+            <img src="${n.ImagenURL}" style="width:100px; height:60px; object-fit:cover; border-radius:5px;">
+            <h4 style="margin:0 0 0 10px; font-size:0.9rem;">${n.Titular}</h4>
+        </div>`).join('');
+
+    document.getElementById('ticker-footer').innerText = d.ticker_footer;
 }
+
+setInterval(rotarPanelDerecho, 10000); // Rota la derecha cada 10s
+setInterval(() => {
+    document.getElementById('reloj').innerText = new Date().toLocaleTimeString();
+}, 1000);
 
 loadData();
-setInterval(loadData, 300000);
-run();
+rotarPanelDerecho();
