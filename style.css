@@ -107,7 +107,7 @@ header {
 }
 
 .titular-grande {
-    font-size: 2.8rem;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--texto);
     line-height: 1.1;
@@ -198,7 +198,9 @@ header {
     box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
     z-index: 100;
     border-top: 4px solid var(--azul); /* Línea divisoria clara */
+    overflow: hidden;
 }
+
 .ticker-label { 
     background: var(--azul); 
     color: white; 
@@ -211,24 +213,24 @@ header {
     z-index: 2;
 }
 .ticker-wrap { 
-    overflow: hidden; 
-    flex-grow: 1; 
-    background: white; 
-    height: 100%; 
-    display: flex; 
-    align-items: center; 
+    flex: 1; /* Ocupa todo el espacio restante a la derecha */
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: white;
+    position: relative; 
 }
 .ticker-move { 
-    display: inline-block; 
-    white-space: nowrap; 
-    animation: scroll 20s linear infinite; /* VELOCIDAD TELEVISIVA */
-    font-size: 2.2rem; 
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%; /* Empieza exactamente fuera de la pantalla por la derecha */
+    animation: scroll-fina 20s linear infinite;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: #000000; /* Negro puro para máxima lectura sobre blanco */
-    letter-spacing: -1px;
+    color: #000;
 }
 
-@keyframes scroll { 
-    from { transform: translateX(100%); } 
-    to { transform: translateX(-100%); } 
-}
+@keyframes scroll-fina {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%);}
