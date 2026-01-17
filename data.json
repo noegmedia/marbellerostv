@@ -1,11 +1,16 @@
 {
     "noticia_destacada": {
-        "Tipo": "D",
-        "Titular": "NoéGMedia crea MarbellerosTV",
-        "Subtitulo": "El nuevo canal de TV Online para todos los marbelleros",
+        "Titular": "MarbellerosTV",
+        "Subtitulo": "Bienvenidos",
         "ImagenURL": ""
     },
     "noticias_normales": [
+        {
+            "Tipo": "N",
+            "Titular": "NoéGMedia crea MarbellerosTV",
+            "Subtitulo": "El nuevo canal de TV Online para todos los marbelleros",
+            "ImagenURL": ""
+        },
         {
             "Tipo": "N",
             "Titular": "Hará mucho frio estos días",
@@ -23,18 +28,12 @@
             "Titular": "Aprobados los presupuestos municipales 2026",
             "Subtitulo": "Los presupuestos contemplan partidas en los principales aspectos",
             "ImagenURL": ""
-        },
-        {
-            "Tipo": "N",
-            "Titular": "2.000.000€ ha ganado un jugador de la loteria",
-            "Subtitulo": "El premio fue extraido bajo numero de maquina",
-            "ImagenURL": ""
         }
     ],
     "ticker_footer": "MarbellerosTV en directo",
     "telefonos": [
         {
-            "Tipo": "D",
+            "Tipo": "N",
             "Titular": "NoéGMedia crea MarbellerosTV",
             "Subtitulo": "El nuevo canal de TV Online para todos los marbelleros",
             "ImagenURL": ""
