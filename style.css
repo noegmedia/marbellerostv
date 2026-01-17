@@ -87,7 +87,7 @@ header {
 
 /* NOTICIA PRINCIPAL */
 #noticia-principal { 
-    font-size: 2.5rem; 
+    font-size: 1rem; 
     line-height: 1.1; 
     font-weight: 800;
     margin: 0; 
@@ -156,3 +156,50 @@ header {
     height: 70px;
     background: white; 
     display: flex;
+}
+
+/* TICKER INFERIOR (FOOTER) */
+.main-footer {
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    height: 70px;
+    background: white; 
+    display: flex; 
+    align-items: center;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+.ticker-label { 
+    background: var(--azul); 
+    color: white; 
+    padding: 0 35px; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    font-weight: 900;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+.ticker-wrap { 
+    overflow: hidden; 
+    flex-grow: 1; 
+    background: white; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+}
+.ticker-move { 
+    display: inline-block; 
+    white-space: nowrap; 
+    animation: scroll 60s linear infinite; 
+    font-size: 1.8rem; 
+    font-weight: 700;
+    color: var(--texto);
+}
+
+@keyframes scroll { 
+    from { transform: translateX(100%); } 
+    to { transform: translateX(-100%); } 
+}
