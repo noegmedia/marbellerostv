@@ -1,24 +1,23 @@
-let subEscena = 1;
+let currentEscena = 1;
 
-function actualizarReloj() {
-    const ahora = new Date();
-    document.getElementById('reloj').innerText = ahora.toLocaleTimeString('es-ES', { hour12: false });
+function updateClock() {
+    document.getElementById('reloj').innerText = new Date().toLocaleTimeString('es-ES', { hour12: false });
 }
-setInterval(actualizarReloj, 1000);
+setInterval(updateClock, 1000);
 
-function rotarPanelDerecho() {
-    document.querySelectorAll('.sub-slide').forEach(s => s.classList.remove('active'));
-    const ids = ['sub-noticias', 'sub-trafico', 'sub-telefonos'];
-    document.getElementById(ids[subEscena - 1]).classList.add('active');
+function switchScene() {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById(`escena-${currentEscena}`).classList.add('active');
     
-    // Si es tráfico, refrescar cámaras
-    if(subEscena === 2) {
+    // Si entramos en cámaras, forzar refresco
+    if(currentEscena === 2) {
         document.querySelectorAll('.cam-box img').forEach(img => {
-            const base = img.src.split('?')[0];
-            img.src = base + '?v=' + Date.now();
+            const src = img.src.split('?')[0];
+            img.src = src + '?t=' + Date.now();
         });
     }
-    subEscena = subEscena < 3 ? subEscena + 1 : 1;
+
+    currentEscena = currentEscena < 3 ? currentEscena + 1 : 1;
 }
 
 async function loadData() {
@@ -31,28 +30,26 @@ async function loadData() {
         document.getElementById('clima-texto').innerText = d.clima.estado;
         document.getElementById('clima-icono').src = `https://openweathermap.org/img/wn/${d.clima.icono_id}@2x.png`;
 
-        // Noticia Principal
-        document.getElementById('noticia-principal').innerHTML = `
-            <img src="${d.noticia_destacada.ImagenURL}">
-            <div class="info-d"><h1>${d.noticia_destacada.Titular}</h1><p>${d.noticia_destacada.Subtitulo}</p></div>`;
-
         // Ticker
         document.getElementById('ticker-footer').innerText = d.ticker_footer;
 
-        // Lista Noticias N
-        document.getElementById('lista-n').innerHTML = d.noticias_normales
-            .map(n => `<div class="item-n"><img src="${n.ImagenURL}"><h4>${n.Titular}</h4></div>`).join('');
+        // Noticia Destacada
+        document.getElementById('noticia-principal').innerHTML = `
+            <img src="${d.noticia_destacada.ImagenURL}">
+            <div class="info-box">
+                <h1>${d.noticia_destacada.Titular}</h1>
+                <p style="font-size:2rem;">${d.noticia_destacada.Subtitulo}</p>
+            </div>`;
 
-        // Lista Teléfonos
+        // Teléfonos
         document.getElementById('lista-t').innerHTML = d.telefonos
-            .map(t => `<div style="background:white; color:#004a99; padding:15px; border-radius:10px; margin-bottom:10px; display:flex; justify-content:space-between; font-weight:bold; font-size:1.3rem;">
-                <span>${t.Servicio}</span><span>${t.Numero}</span></div>`).join('');
+            .map(t => `<div class="tel-row"><span>${t.Servicio}</span><span>${t.Numero}</span></div>`).join('');
 
-    } catch (e) { console.log("Cargando datos..."); }
+    } catch (e) { console.log("Cargando..."); }
 }
 
-setInterval(rotarPanelDerecho, 15000);
+setInterval(switchScene, 15000); // Cada escena dura 15 segundos
 setInterval(loadData, 300000);
 loadData();
-actualizarReloj();
-rotarPanelDerecho();
+updateClock();
+switchScene();
