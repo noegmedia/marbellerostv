@@ -10,19 +10,23 @@
    <div class="main-container">
     <header>
         <div id="clima-alerta" class="clima-box alerta-verde">
-            <span id="temp">--°C</span> | <span id="estado-clima">Cargando...</span>
+            <span id="clima-icono"></span><span id="clima-temp">--°C</span> | <span id="clima-texto">Cargando...</span>
+            
         </div>
         <div id="reloj">00:00:00</div>
-        <div id="titulo-banner">MARBELLA • INFO</div>
+        <div id="titulo-banner">
+            <h1>MarbellaTV</h1><h2>La TV Online de Marbella</h2>
+            <p>Creada por NoéGMedia</p>
+        </div>
     </header>
 
     <div class="grid-layout">
         <section>
-            <div class="tag">ÚLTIMA HORA MARBELLA</div>
-            <div id="noticias-locales">Cargando noticias de Marbella...</div>
+            <div class="titulete">ÚLTIMAS NOTICIAS</div>
+            <div id="noticia_principal">Cargando noticias de Marbella...</div>
             
-            <div class="tag" style="margin-top: 30px;">AGENDA</div>
-            <ul id="lista-eventos" class="eventos-lista"></ul>
+            <div class="titulete" style="margin-top: 30px;">Teléfonos de Interés</div>
+            <ul id="lista-t" class="eventos-lista"></ul>
         </section>
 
         <section class="camaras">
@@ -38,7 +42,6 @@
 </div>
 
     <footer class="main-footer">
-        <div class="ticker-label">ÚLTIMA HORA</div>
         <div class="ticker-wrap"><div id="ticker-footer" class="ticker-move"></div></div>
     </footer>
 
