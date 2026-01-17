@@ -1,33 +1,31 @@
-import os
-import urllib.request
-import json
-import re
+import csv, json, urllib.request, os
 from datetime import datetime
 
-def buscar_titulares(url, backup_msg):
+ID_HOJA = "1Q2Wc3xX1fZ8ynhyrYrRBDiWYQY6E0KSsLffqWDnCjRw"
+URL_NOTICIAS = f"https://docs.google.com/spreadsheets/d/{ID_HOJA}/export?format=csv&gid=0"
+URL_TELEFONOS = f"https://docs.google.com/spreadsheets/d/{ID_HOJA}/export?format=csv&sheet=Telefonos"
+
+def descargar_csv(url):
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-        with urllib.request.urlopen(req, timeout=15) as response:
-            content = response.read().decode('utf-8', errors='ignore')
-            # Buscamos lo que hay entre <title> y </title>
-            encontrados = re.findall(r'<title>(.*?)</title>', content)
-            # Limpiamos y quitamos el primer título (suele ser el nombre del diario)
-            limpios = [t.replace('<![CDATA[', '').replace(']]>', '').strip() for t in encontrados[1:6]]
-            return limpios if len(limpios) > 0 else [backup_msg]
-    except:
-        return [backup_msg]
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            lineas = response.read().decode('utf-8').splitlines()
+            return list(csv.DictReader(lineas))
+    except: return []
 
-# Ejecución
-clima = {"temp": "19°C", "estado": "Despejado", "alerta": "verde"} # Por defecto
-# Aquí iría tu lógica de OpenWeather que ya tenemos...
+def actualizar():
+    noticias_raw = descargar_csv(URL_NOTICIAS)
+    telefonos_raw = descargar_csv(URL_TELEFONOS)
+    destacada = next((n for n in noticias_raw if n.get('Tipo') == 'D'), None)
+    normales = [n for n in noticias_raw if n.get('Tipo') == 'N'][:4]
 
-datos = {
-    "titulo": "MARBELLA DIGITAL",
-    "clima": clima,
-    "noticias_locales": " • ".join(buscar_titulares("https://www.laopiniondemalaga.es/rss/section/1105", "Marbella: Actualidad local en directo")),
-    "noticias_nacionales": " --- ".join(buscar_titulares("https://www.abc.es/rss/2.0/espana/", "Siga la actualidad nacional en Marbella TV")),
-    "eventos": buscar_titulares("https://www.malagahoy.es/rss/marbella/", "Consulta la agenda cultural en nuestra web")[:4]
-}
+    datos = {
+        "noticia_destacada": destacada or {"Titular": "Bienvenidos", "Subtitulo": "MarbellerosTV", "ImagenURL": ""},
+        "noticias_normales": normales,
+        "telefonos": telefonos_raw,
+        "clima": {"temp": "18°C", "humedad": "65%", "precip": "0%"}
+    }
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(datos, f, ensure_ascii=False, indent=4)
 
-with open('data.json', 'w', encoding='utf-8') as f:
-    json.dump(datos, f, ensure_ascii=False, indent=4)
+if __name__ == "__main__": actualizar()
