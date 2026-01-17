@@ -1,13 +1,21 @@
 import csv, json, urllib.request, os
 
-# Configuraciones que ya tenemos preparadas
+# CONFIGURACIÓN
 ID_HOJA = "1Q2Wc3xX1fZ8ynhyrYrRBDiWYQY6E0KSsLffqWDnCjRw"
-API_KEY_WEATHER = "TU_API_KEY_AQUI" # Usando la API de OpenWeather como ya establecimos
+API_KEY_WEATHER = "TU_API_KEY_AQUI" 
 CIUDAD = "Marbella,ES"
 
 URL_NOTICIAS = f"https://docs.google.com/spreadsheets/d/{ID_HOJA}/export?format=csv&gid=0"
 URL_TELEFONOS = f"https://docs.google.com/spreadsheets/d/{ID_HOJA}/export?format=csv&sheet=Telefonos"
 URL_WEATHER = f"https://api.openweathermap.org/data/2.5/weather?q={CIUDAD}&appid={API_KEY_WEATHER}&units=metric&lang=es"
+
+def descargar_csv(url):
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            lineas = response.read().decode('utf-8').splitlines()
+            return list(csv.DictReader(lineas))
+    except: return []
 
 def obtener_clima():
     try:
@@ -22,23 +30,18 @@ def obtener_clima():
         return {"temp": "18°C", "estado": "DESPEJADO", "icono_id": "01d"}
 
 def actualizar():
-    # Descarga de Excel (Noticias y Ticker F)
-    noticias_raw = []
-    try:
-        req = urllib.request.Request(URL_NOTICIAS, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req) as res:
-            lineas = res.read().decode('utf-8').splitlines()
-            noticias_raw = list(csv.DictReader(lineas))
-    except: pass
+    noticias_raw = descargar_csv(URL_NOTICIAS)
+    telefonos_raw = descargar_csv(URL_TELEFONOS)
 
     destacada = next((n for n in noticias_raw if n.get('Tipo') == 'D'), None)
     normales = [n for n in noticias_raw if n.get('Tipo') == 'N'][:4]
     noticias_f = [n.get('Titular') for n in noticias_raw if n.get('Tipo') == 'F']
 
     datos = {
-        "noticia_destacada": destacada or {"Titular": "Bienvenidos", "Subtitulo": "MarbellerosTV", "ImagenURL": ""},
+        "noticia_destacada": destacada or {"Titular": "MarbellerosTV", "Subtitulo": "Bienvenidos", "ImagenURL": ""},
         "noticias_normales": normales,
-        "ticker_footer": " • ".join(noticias_f) if noticias_f else "MarbellerosTV",
+        "ticker_footer": " • ".join(noticias_f) if noticias_f else "MarbellerosTV en directo",
+        "telefonos": telefonos_raw,
         "clima": obtener_clima()
     }
 
