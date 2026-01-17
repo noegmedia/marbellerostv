@@ -16,12 +16,18 @@ def descargar_csv(url):
 def actualizar():
     noticias_raw = descargar_csv(URL_NOTICIAS)
     telefonos_raw = descargar_csv(URL_TELEFONOS)
+
     destacada = next((n for n in noticias_raw if n.get('Tipo') == 'D'), None)
     normales = [n for n in noticias_raw if n.get('Tipo') == 'N'][:4]
+    
+    # Recopilamos todas las de tipo F y las unimos en un solo texto largo
+    ticker_noticias = [n.get('Titular') for n in noticias_raw if n.get('Tipo') == 'F']
+    texto_ticker = " • ".join(ticker_noticias) if ticker_noticias else "MarbellerosTV: La actualidad de Marbella en directo"
 
     datos = {
         "noticia_destacada": destacada or {"Titular": "Bienvenidos", "Subtitulo": "MarbellerosTV", "ImagenURL": ""},
         "noticias_normales": normales,
+        "ticker_footer": texto_ticker,
         "telefonos": telefonos_raw,
         "clima": {"temp": "18°C", "humedad": "65%", "precip": "0%"}
     }
