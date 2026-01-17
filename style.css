@@ -1,41 +1,33 @@
 :root { --azul: #004a99; --blanco: #ffffff; --rojo: #cc0000; }
-
 body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; background: var(--azul); font-family: 'Arial', sans-serif; overflow: hidden; }
 
-/* HEADER Y FOOTER FIJOS */
-.tv-header { height: 70px; background: var(--blanco); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
+.tv-header { height: 70px; background: var(--blanco); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; border-bottom: 4px solid var(--azul); }
 .logo { font-size: 2.2rem; font-weight: 900; color: var(--azul); }
 .logo span { color: var(--rojo); }
 #reloj { font-size: 2rem; color: #333; font-weight: bold; }
 
 .tv-footer { height: 60px; background: var(--blanco); position: fixed; bottom: 0; width: 100%; display: flex; align-items: center; }
-.ticker-label { background: var(--rojo); color: white; padding: 0 20px; height: 100%; display: flex; align-items: center; font-weight: bold; }
+.ticker-label { background: var(--rojo); color: white; padding: 0 20px; height: 100%; display: flex; align-items: center; font-weight: bold; z-index: 10; }
 .ticker-wrap { overflow: hidden; flex: 1; }
-.ticker-move { white-space: nowrap; display: inline-block; animation: ticker 40s linear infinite; font-size: 1.6rem; color: #333; padding-left: 100%; }
+.ticker-move { white-space: nowrap; display: inline-block; animation: ticker 45s linear infinite; font-size: 1.6rem; color: #333; padding-left: 100%; }
 
 @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-/* CONTENEDOR DE ESCENAS */
 #escenario-tv { height: calc(100vh - 130px); position: relative; }
 .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; display: flex; justify-content: center; align-items: center; }
 .slide.active { opacity: 1; }
 
-/* CUADRÍCULA DE CÁMARAS IGUALADAS */
-.traffic-container { width: 95%; height: 90%; display: flex; flex-direction: column; align-items: center; }
-.tag-viva { background: var(--rojo); color: white; padding: 8px 20px; margin-bottom: 10px; border-radius: 4px; font-weight: bold; }
-.traffic-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
-    grid-template-rows: repeat(2, 1fr);    /* 2 filas iguales */
-    gap: 15px; 
-    width: 100%; 
-    height: 100%; 
-}
-.cam-box { position: relative; background: #000; border-radius: 10px; overflow: hidden; border: 2px solid rgba(255,255,255,0.2); }
+/* Cámaras 5 iguales */
+.traffic-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 15px; width: 95%; height: 85%; }
+.cam-box { position: relative; background: #000; border-radius: 10px; overflow: hidden; }
 .cam-box img { width: 100%; height: 100%; object-fit: cover; }
-.cam-box span { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; border-radius: 4px; font-size: 1.1rem; }
+.cam-box span { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 4px; }
 
-/* NOTICIAS */
+/* Listín */
+.telefonos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 85%; }
+.tel-item { background: var(--blanco); color: var(--azul); padding: 20px; border-radius: 10px; display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem; }
+
+/* Noticias */
 .news-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; width: 95%; height: 90%; gap: 20px; }
 .col-main { position: relative; border-radius: 15px; overflow: hidden; }
 .col-main img { width: 100%; height: 100%; object-fit: cover; }
