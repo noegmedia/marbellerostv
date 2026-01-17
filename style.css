@@ -1,24 +1,35 @@
-:root { --azul: #004a99; --blanco: #fff; --gris: #f4f4f4; }
+:root { --azul: #004a99; --blanco: #fff; }
+body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background: var(--azul); font-family: 'Arial', sans-serif; }
 
-body { background: var(--azul); font-family: sans-serif; margin: 0; color: #333; }
+/* Cabecera */
+.main-header { height: 100px; background: var(--blanco); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; border-bottom: 5px solid gold; }
+.logo { font-size: 2.5rem; font-weight: 900; color: var(--azul); }
+.logo span { color: var(--azul); }
+.header-right { display: flex; align-items: center; gap: 40px; }
+#reloj { font-size: 5rem; font-weight: 900; color: #222; }
 
-.main-header { height: 80px; background: var(--blanco); display: flex; justify-content: space-between; align-items: center; padding: 0 30px; border-bottom: 5px solid gold; }
-.logo { font-size: 2rem; font-weight: 900; color: var(--azul); }
+#clima-alerta { background: var(--verde); color: white; padding: 10px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; min-width: 140px; }
+#clima-temp { font-size: 2.5rem; font-weight: bold; }
 
-.main-container { display: grid; grid-template-columns: 60% 40%; height: calc(100vh - 140px); gap: 20px; padding: 20px; box-sizing: border-box; }
+/* Layout */
+.main-layout { display: grid; grid-template-columns: 62% 38%; height: calc(100vh - 165px); gap: 20px; padding: 20px; }
+.panel-d { border-radius: 20px; overflow: hidden; position: relative; background: #FFFFFF; border: 4px solid white; }
+.panel-d img { width: 100%; height: 100%; object-fit: cover; }
+.info-d { position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 40px; color: white; width: 100%; }
 
-/* Bloque Izquierdo */
-.block-destacada { background: #000; border-radius: 15px; overflow: hidden; position: relative; border: 4px solid var(--blanco); }
-.block-destacada img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-.info-d { position: absolute; bottom: 0; padding: 30px; color: white; background: linear-gradient(transparent, black); }
-
-/* Bloque Derecho (Carrusel interno) */
-.block-rotativo { background: rgba(255,255,255,0.1); border-radius: 15px; position: relative; overflow: hidden; }
+/* Rotador */
+.panel-rotativo { background: rgba(255,255,255,0.1); border-radius: 20px; position: relative; overflow: hidden; border: 2px solid rgba(255,255,255,0.2); }
 .sub-slide { position: absolute; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; opacity: 0; transition: 1s; color: white; }
 .sub-slide.active { opacity: 1; }
+.panel-title { border-bottom: 2px solid white; padding-bottom: 10px; margin-bottom: 20px; }
+
+/* Cámaras en el panel derecho */
+.traffic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cam-box { position: relative; height: 120px; border-radius: 8px; overflow: hidden; }
+.cam-box img { width: 100%; height: 100%; object-fit: cover; }
+.cam-box span { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); font-size: 0.8rem; padding: 2px 8px; width: 100%; }
 
 /* Ticker */
-.main-footer { height: 60px; background: var(--blanco); position: fixed; bottom: 0; width: 100%; display: flex; align-items: center; }
-.ticker-label { background: red; color: white; padding: 0 20px; height: 100%; display: flex; align-items: center; font-weight: bold; }
-.ticker-move { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 1.4rem; }
+.main-footer { height: 60px; background: var(--blanco); position: fixed; bottom: 0; width: 100%; display: flex; align-items: center; border-top: 2px solid #ddd; }
+.ticker-move { white-space: nowrap; display: inline-block; animation: ticker 30s linear infinite; font-size: 1.8rem; color: #222; }
 @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
