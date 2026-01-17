@@ -1,4 +1,7 @@
-import csv, json, urllib.request, os
+import csv
+import json
+import urllib.request
+import os
 from datetime import datetime
 
 ID_HOJA = "1Q2Wc3xX1fZ8ynhyrYrRBDiWYQY6E0KSsLffqWDnCjRw"
@@ -17,21 +20,21 @@ def actualizar():
     noticias_raw = descargar_csv(URL_NOTICIAS)
     telefonos_raw = descargar_csv(URL_TELEFONOS)
 
+    # Separamos los tipos que definiste
     destacada = next((n for n in noticias_raw if n.get('Tipo') == 'D'), None)
     normales = [n for n in noticias_raw if n.get('Tipo') == 'N'][:4]
-    
-    # Recopilamos todas las de tipo F y las unimos en un solo texto largo
-    ticker_noticias = [n.get('Titular') for n in noticias_raw if n.get('Tipo') == 'F']
-    texto_ticker = " • ".join(ticker_noticias) if ticker_noticias else "MarbellerosTV: La actualidad de Marbella en directo"
+    noticias_f = [n.get('Titular') for n in noticias_raw if n.get('Tipo') == 'F']
 
     datos = {
         "noticia_destacada": destacada or {"Titular": "Bienvenidos", "Subtitulo": "MarbellerosTV", "ImagenURL": ""},
         "noticias_normales": normales,
-        "ticker_footer": texto_ticker,
+        "ticker_footer": " • ".join(noticias_f) if noticias_f else "MarbellerosTV - La televisión de Marbella",
         "telefonos": telefonos_raw,
-        "clima": {"temp": "18°C", "humedad": "65%", "precip": "0%"}
+        "clima": {"temp": "18°C", "humedad": "60%"} # Esto se puede automatizar luego con una API
     }
+
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(datos, f, ensure_ascii=False, indent=4)
 
-if __name__ == "__main__": actualizar()
+if __name__ == "__main__":
+    actualizar()
