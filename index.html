@@ -2,46 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>MarbellerosTV - Dashboard</title>
+    <title>MarbellerosTV Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="main-header">
         <div class="logo">MARBELLEROS<span>TV</span></div>
-        <div id="clima-header">--°C Marbella</div>
-        <div id="reloj">00:00:00</div>
+        <div class="header-right">
+            <div id="clima-alerta" class="alerta-verde">
+                <span id="clima-texto">SIN ALERTAS</span>
+                <span id="clima-temp">--°C</span>
+            </div>
+            <div id="reloj">00:00:00</div>
+        </div>
     </header>
 
-    <div class="main-container">
-        <section id="noticia-principal" class="block-destacada">
-            </section>
+    <div class="main-layout">
+        <section id="noticia-principal" class="panel-d"></section>
 
-        <section class="block-rotativo">
-            <div id="sub-escena-noticias" class="sub-slide active">
-                <h3>NOTICIAS LOCALES</h3>
+        <section class="panel-rotativo">
+            <div id="sub-noticias" class="sub-slide active">
+                <h2 class="panel-title">MÁS NOTICIAS</h2>
                 <div id="lista-n"></div>
             </div>
-            <div id="sub-escena-trafico" class="sub-slide">
-                <h3>TRÁFICO A-7</h3>
-                <div class="mini-grid-cams">
-                    <img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg">
-                    <img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg">
+            <div id="sub-trafico" class="sub-slide">
+                <h2 class="panel-title">TRÁFICO DGT</h2>
+                <div class="traffic-grid">
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>La Cañada</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Ojén</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>M. Este</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Nueva And.</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>P. Banús</span></div>
                 </div>
             </div>
-            <div id="sub-escena-telefonos" class="sub-slide">
-                <h3>TELÉFONOS ÚTILES</h3>
+            <div id="sub-telefonos" class="sub-slide">
+                <h2 class="panel-title">TELÉFONOS ÚTILES</h2>
                 <div id="lista-t"></div>
             </div>
         </section>
     </div>
 
     <footer class="main-footer">
-        <div class="ticker-label">ÚLTIMA HORA</div>
-        <div class="ticker-wrap">
-            <div id="ticker-footer" class="ticker-move"></div>
-        </div>
+        
+        <div class="ticker-wrap"><div id="ticker-footer" class="ticker-move"></div></div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
