@@ -6,39 +6,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-left"><div class="logo">MARBELLEROS<span>TV</span></div></div>
-        <div class="header-center"><div id="reloj">00:00:00</div></div>
-        <div class="header-right">
-            <div id="clima-alerta" class="alerta-verde">
-                <img id="clima-icono" src="" alt="clima">
-                <div class="clima-info-box">
-                    <span id="clima-texto">CARGANDO</span>
-                    <span id="clima-temp">--°C</span>
-                </div>
-            </div>
+    
+   <div class="main-container">
+    <header>
+        <div id="clima-alerta" class="clima-box alerta-verde">
+            <span id="temp">--°C</span> | <span id="estado-clima">Cargando...</span>
         </div>
+        <div id="reloj">00:00:00</div>
+        <div id="titulo-banner">MARBELLA • INFO</div>
     </header>
 
-    <main id="tv-stage">
-        <section id="escena-1" class="slide active">
-            <div id="noticia-principal" class="full-destacada"></div>
+    <div class="grid-layout">
+        <section>
+            <div class="tag">ÚLTIMA HORA MARBELLA</div>
+            <div id="noticias-locales">Cargando noticias de Marbella...</div>
+            
+            <div class="tag" style="margin-top: 30px;">AGENDA</div>
+            <ul id="lista-eventos" class="eventos-lista"></ul>
         </section>
 
-        <section id="escena-2" class="slide">
-            <div class="traffic-grid">
-                <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>La Cañada</span></div>
-                <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Ojén</span></div>
-                <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>M. Este</span></div>
-                <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Nueva And.</span></div>
-                <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>P. Banús</span></div>
+        <section class="camaras">
+            <div class="cam-grid">
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>La Cañada</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1547.jpg"><span>Ojén</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/200.jpg"><span>Marbella Este</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/198.jpg"><span>Nueva Andalucía</span></div>
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/197.jpg"><span>Puerto Banús</span></div>
             </div>
         </section>
-
-        <section id="escena-3" class="slide">
-            <div id="lista-t" class="telefonos-container"></div>
-        </section>
-    </main>
+    </div>
+</div>
 
     <footer class="main-footer">
         <div class="ticker-label">ÚLTIMA HORA</div>
