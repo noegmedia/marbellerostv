@@ -1,14 +1,71 @@
 {
-    "titulo": "MARBELLA DIGITAL",
-    "clima": {
-        "temp": "12°C",
-        "estado": "Lluvia moderada",
-        "alerta": "verde"
+    "noticia_destacada": {
+        "Tipo": "D",
+        "Titular": "NoéGMedia crea MarbellerosTV",
+        "Subtitulo": "El nuevo canal de TV Online para todos los marbelleros",
+        "ImagenURL": ""
     },
-    "noticias_locales": "Actualizando información local...",
-    "noticias_nacionales": "Actualizando información local...",
-    "eventos": [
-        "Actualizando información local..."
+    "noticias_normales": [
+        {
+            "Tipo": "N",
+            "Titular": "Hará mucho frio estos días",
+            "Subtitulo": "Las temperaturas bajan y aumenta la humedad hasta el domingo",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "El Equipo local gana 2-1",
+            "Subtitulo": "Tras un duro partido, el equipo gana de nuevo",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "Aprobados los presupuestos municipales 2026",
+            "Subtitulo": "Los presupuestos contemplan partidas en los principales aspectos",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "2.000.000€ ha ganado un jugador de la loteria",
+            "Subtitulo": "El premio fue extraido bajo numero de maquina",
+            "ImagenURL": ""
+        }
     ],
-    "ultima_actualizacion": "20:39"
+    "ticker_footer": "MarbellerosTV en directo",
+    "telefonos": [
+        {
+            "Tipo": "D",
+            "Titular": "NoéGMedia crea MarbellerosTV",
+            "Subtitulo": "El nuevo canal de TV Online para todos los marbelleros",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "Hará mucho frio estos días",
+            "Subtitulo": "Las temperaturas bajan y aumenta la humedad hasta el domingo",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "El Equipo local gana 2-1",
+            "Subtitulo": "Tras un duro partido, el equipo gana de nuevo",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "Aprobados los presupuestos municipales 2026",
+            "Subtitulo": "Los presupuestos contemplan partidas en los principales aspectos",
+            "ImagenURL": ""
+        },
+        {
+            "Tipo": "N",
+            "Titular": "2.000.000€ ha ganado un jugador de la loteria",
+            "Subtitulo": "El premio fue extraido bajo numero de maquina",
+            "ImagenURL": ""
+        }
+    ],
+    "clima": {
+        "temp": "18°C",
+        "estado": "SIN ALERTAS"
+    }
 }
