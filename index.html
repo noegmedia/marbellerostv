@@ -1,19 +1,40 @@
-<header class="main-header">
-    <div class="header-left">
-        <div class="logo">MARBELLEROS<span>TV</span></div>
-    </div>
-    
-    <div class="header-center">
-        <div id="reloj">00:00:00</div>
-    </div>
-
-    <div class="header-right">
-        <div id="clima-alerta" class="alerta-verde">
-            <img id="clima-icono" src="" alt="Icono Clima">
-            <div class="clima-info-box">
-                <span id="clima-texto">ESTADO</span>
-                <span id="clima-temp">--°C</span>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarbellerosTV Live</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo">MARBELLEROS<span>TV</span></div>
+        </div>
+        <div class="header-center">
+            <div id="reloj">00:00:00</div>
+        </div>
+        <div class="header-right">
+            <div id="clima-alerta" class="alerta-verde">
+                <img id="clima-icono" src="" alt="clima">
+                <div class="clima-info-box">
+                    <span id="clima-texto">CARGANDO</span>
+                    <span id="clima-temp">--°C</span>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+
+    <main class="main-layout">
+        <section id="noticia-principal" class="panel-d"></section>
+
+        <section class="panel-rotativo">
+            <div id="sub-noticias" class="sub-slide active">
+                <h2 class="panel-title">MÁS NOTICIAS</h2>
+                <div id="lista-n"></div>
+            </div>
+            <div id="sub-trafico" class="sub-slide">
+                <h2 class="panel-title">TRÁFICO EN DIRECTO</h2>
+                <div class="traffic-grid">
+                    <div class="cam-box"><img src="https://infocar.dgt.es/etraffic/data/camaras/1548.jpg"><span>La Cañada</span></div>
+                    <div class="cam-box"><img src="
